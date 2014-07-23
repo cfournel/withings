@@ -1,0 +1,25 @@
+{
+    "name": "huitiemesens/withings",
+    "version": "0.0.1",
+    "type": "library",
+    "description": "Withings api library.",
+    "keywords": ["withings", "api"],
+    "homepage": "https://github.com/huitiemesens/withings",
+    "license" : "Apache-2.0",
+    "authors": [
+        {
+            "name": "Charles-antoine fournel",
+            "email": "charles@huitiemesens.fr",
+            "homepage": "http://www.huitiemesens.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "huitiemesens/oauth": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Withings": "lib/"
+        }
+    }
+}

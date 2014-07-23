@@ -1,6 +1,6 @@
 ## WithingsPHP ##
 
-Basic wrapper for the OAuth-based [Withings](http://withings.com) [REST API](http://oauth.withings.com). See [oauth.withings.com](http://oauth.withings.com) for details on their OAuth implementation.
+Basic wrapper for the OAuth-based [Withings](http://withings.com) [REST API](http://oauth.withings.com). See [oauth.withings.com](http://oauth.withings.com/en/api/oauthguide) for details on their OAuth implementation.
 
 Both this library and the Withings API are in **beta**.
 

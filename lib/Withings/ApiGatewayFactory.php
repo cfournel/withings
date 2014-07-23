@@ -1,8 +1,5 @@
 <?php
 namespace Withings;
-
-class ApiGateway{
-
     
    /*
     * Implementation of Withings API based on lusitanian withings implementation

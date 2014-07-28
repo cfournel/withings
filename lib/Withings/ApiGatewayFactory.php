@@ -213,6 +213,4 @@ class ApiGatewayFactory
         return $this->service;
     }
 }
-
-}
 ?>

@@ -10,9 +10,9 @@ class UserGateway extends EndpointGateway{
      * @param String $user
      * @return Data
      */
-    public function getProfile( $user )
+    public function getProfile( $user = null )
     {
-        if ( empty ( $user ) )
+        if ( $user == null )
             throw new \Exception("No Withings User id defined");
         return $this->makeApiRequest( '?action=getmeas&userid=' . $user );
     }

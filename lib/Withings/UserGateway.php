@@ -12,7 +12,9 @@ class UserGateway extends EndpointGateway{
      */
     public function getProfile( $user )
     {
-        return $this->makeApiRequest( '?userid=' . $user );
+        if ( empty ( $user ) )
+            throw new \Exception("No Withings User id defined");
+        return $this->makeApiRequest( '?action=getmeas&userid=' . $user );
     }
 }
 ?>

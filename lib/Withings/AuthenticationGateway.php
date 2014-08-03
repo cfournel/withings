@@ -2,8 +2,8 @@
 
 namespace Withings;
 
-class AuthenticationGateway extends EndpointGateway {
-
+class AuthenticationGateway extends EndpointGateway
+{
     public function isAuthorized()
     {
         return $this->service->getStorage()->hasAccessToken('Withings');
@@ -22,19 +22,19 @@ class AuthenticationGateway extends EndpointGateway {
         header('Location: ' . $url);
         exit;
     }
-    
+
     /**
      * Authenticate user, request access token.
      *
      * @access public
-     * @param string $token
-     * @param string $verifier
+     * @param  string                                            $token
+     * @param  string                                            $verifier
      * @return \OAuth\Common\Token\TokenInterface\TokenInterface
      */
     public function authenticateUser($token, $verifier)
     {
         $tokenSecret = $this->service->getStorage()->retrieveAccessToken('Withings');
-        
+
         return $this->service->requestAccessToken(
             $token,
             $verifier,

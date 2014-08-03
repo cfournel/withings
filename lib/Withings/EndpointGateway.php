@@ -2,8 +2,8 @@
 
 namespace Withings;
 
-class EndpointGateway {
-
+class EndpointGateway
+{
     /**
      * @var \OAuth\OAuth1\Service\ServiceInterface
      */
@@ -29,19 +29,21 @@ class EndpointGateway {
     public function setService($service)
     {
         $this->service = $service;
+
         return $this;
     }
 
     /**
      * Set response format.
-     * 
+     *
      * @access public
-     * @param string $response_format
+     * @param  string                    $response_format
      * @return \Withings\EndpointGateway
      */
     public function setResponseFormat($format)
     {
         $this->responseFormat = $format;
+
         return $this;
     }
 
@@ -49,12 +51,13 @@ class EndpointGateway {
      * Set Withings user ids.
      *
      * @access public
-     * @param string $id
+     * @param  string                    $id
      * @return \Withings\EndpointGateway
      */
     public function setUserID($id)
     {
         $this->userID = $id;
+
         return $this;
     }
 
@@ -62,11 +65,11 @@ class EndpointGateway {
      * Make an API request
      *
      * @access protected
-     * @param string $resource Endpoint after '.../1/'
-     * @param string $method ('GET', 'POST', 'PUT', 'DELETE')
-     * @param array $body Request parameters
-     * @param array $extraHeaders Additional custom headers
-     * @return mixed stdClass for json response, SimpleXMLElement for XML response.
+     * @param  string $resource     Endpoint after '.../1/'
+     * @param  string $method       ('GET', 'POST', 'PUT', 'DELETE')
+     * @param  array  $body         Request parameters
+     * @param  array  $extraHeaders Additional custom headers
+     * @return mixed  stdClass for json response, SimpleXMLElement for XML response.
      */
     protected function makeApiRequest($resource, $method = 'GET', $body = array(), $extraHeaders = array())
     {

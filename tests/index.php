@@ -7,7 +7,6 @@
     $api->initSession();
   }
 
-
 ?>
 
 <pre>

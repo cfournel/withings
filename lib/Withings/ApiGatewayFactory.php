@@ -1,16 +1,15 @@
 <?php
 namespace Withings;
-    
+
    /*
     * Implementation of Withings API based on lusitanian withings implementation
-    * 
+    *
     * PHP Version 5.4
     *
     * @author     Charles-Antoine FOURNEL <charles@huitiemesens.fr>
     * @copyright  Copyright (c) 2014 Huitieme sens
     * @license    http://www.opensource.org/licenses/mit-license.html  MIT License
     */
-
 
 use \OAuth\Common\Consumer\Credentials;
 use \OAuth\ServiceFactory;
@@ -31,7 +30,7 @@ class ApiGatewayFactory
      * @var string (default: '-')
      */
     protected $userID = '-';
-    
+
     /**
      * @var string (default: 'json')
      */
@@ -41,12 +40,12 @@ class ApiGatewayFactory
      * @var \OAuth\OAuth1\Service\ServiceInterface
      */
     protected $service;
-    
+
     /**
      * @var \OAuth\Common\Storage\TokenStorageInterface
      */
     protected $storageAdapter;
-    
+
     /**
      * @var string
      */
@@ -59,35 +58,37 @@ class ApiGatewayFactory
 
     /**
      * Set consumer credentials
-     * 
+     *
      * @access public
-     * @param string $consumer_key Application consumer key for Withings API
-     * @param string $consumer_secret Application secret
+     * @param  string                      $consumer_key    Application consumer key for Withings API
+     * @param  string                      $consumer_secret Application secret
      * @return \Withings\ApiGatewayFactory
      */
     public function setCredentials($consumer_key, $consumer_secret)
     {
         $this->consumerKey    = $consumer_key;
         $this->consumerSecret = $consumer_secret;
+
         return $this;
     }
 
     /**
      * Set storage adapter.
-     * 
+     *
      * @access public
-     * @param \OAuth\Common\Storage\TokenStorageInterface $adapter
+     * @param  \OAuth\Common\Storage\TokenStorageInterface $adapter
      * @return \Withings\ApiGatewayFactory
      */
     public function setStorageAdapter(\OAuth\Common\Storage\TokenStorageInterface $adapter)
     {
         $this->storageAdapter = $adapter;
+
         return $this;
     }
 
     /**
      * Get storage adapter.
-     * 
+     *
      * @access public
      * @return \OAuth\Common\Storage\TokenStorageInterface
      */
@@ -98,9 +99,9 @@ class ApiGatewayFactory
 
     /**
      * Set response format.
-     * 
+     *
      * @access public
-     * @param string $format Response format (json or xml) to use in API calls
+     * @param  string                      $format Response format (json or xml) to use in API calls
      * @throws \Withings\Exception
      * @return \Withings\ApiGatewayFactory
      */
@@ -110,19 +111,21 @@ class ApiGatewayFactory
             throw new Exception("Reponse format must be one of 'json', 'xml'");
         }
         $this->responseFormat = $format;
+
         return $this;
     }
 
     /**
      * Set callback URL.
-     * 
+     *
      * @access public
-     * @param string $url
+     * @param  string                      $url
      * @return \Withings\ApiGatewayFactory
      */
     public function setCallbackURL($url)
     {
         $this->callbackURL = $url;
+
         return $this;
     }
 
@@ -130,12 +133,13 @@ class ApiGatewayFactory
      * Set Withings user id for API calls
      *
      * @access public
-     * @param string $id
+     * @param  string                      $id
      * @return \Withings\ApiGatewayFactory
      */
     public function setUserID($id)
     {
         $this->userID = $id;
+
         return $this;
     }
 
@@ -148,6 +152,7 @@ class ApiGatewayFactory
     public function setHttpClient(\OAuth\Common\Http\Client\ClientInterface $client)
     {
         $this->httpClient = $client;
+
         return $this;
     }
 
@@ -155,6 +160,7 @@ class ApiGatewayFactory
     {
         $gateway = new AuthenticationGateway;
         $this->injectGatewayDependencies($gateway);
+
         return $gateway;
     }
 
@@ -162,6 +168,7 @@ class ApiGatewayFactory
     {
         $gateway = new UserGateway;
         $this->injectGatewayDependencies($gateway);
+
         return $gateway;
     }
 
@@ -213,4 +220,3 @@ class ApiGatewayFactory
         return $this->service;
     }
 }
-?>

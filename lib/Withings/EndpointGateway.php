@@ -70,14 +70,20 @@ class EndpointGateway {
      */
     protected function makeApiRequest($resource, $method = 'GET', $body = array(), $extraHeaders = array())
     {
-        $path = $resource;
-
+        $resource   = explode ( "?" , $resource ); // . '.' . $this->responseFormat 
+        $path       = $resource[0];
+        
+        // we explode $resource[1] to get the userid
+        $resource   = explode ( "&userid=", $resource[1] );
+        $action     = $resource[0];
+        $userid     = $resource[1];
+        
         if ($method == 'GET' && $body) {
             $path .= '?' . http_build_query($body);
             $body = array();
         }
 
-        $response = $this->service->request($path, $method, $body, $extraHeaders);
+        $response = $this->service->request($path, $method, $body, $extraHeaders, array("api" => "withings", "action" => $action, "userid" => $userid ) );
 
         return $this->parseResponse($response);
     }

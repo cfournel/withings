@@ -6,6 +6,8 @@ Both this library and the Withings API are in **beta**.
 
 This library does not require the PHP OAuth extension. It should work on any server with PHP >= 5.3.
 
+This bundle allows you to get notification from withings or grab manually informations.
+
 ## Installation ##
 This package is installable with composer:
     "huitiemesens/withings": "dev-master"

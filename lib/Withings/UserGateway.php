@@ -72,9 +72,9 @@ class UserGateway extends EndpointGateway{
             throw new \Exception("No callback for notification defined");
 
         if ( $comment == null )
-            $comment = "A notification from withings"
+            $comment = "A notification from withings";
 
-        return $this->makeApiRequest( 'notify?action=subscribe&callbackurl=' . rawurlencode( $callback ) . '&comment=' . $comment . '&userid=' . $user );
+        return $this->makeApiRequest( 'notify?action=subscribe&callbackurl=' . rawurlencode( $callback ) . '&comment=' . rawurlencode($comment) . '&userid=' . $user );
     }
 
     /**
@@ -128,4 +128,7 @@ class UserGateway extends EndpointGateway{
         return $this->makeApiRequest( 'notify?action=revoke&callbackurl=' . rawurlencode( $callback ) . '&userid=' . $user );
     }
 }
+?>
+?>
+?>
 ?>

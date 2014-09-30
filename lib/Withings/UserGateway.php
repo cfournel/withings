@@ -63,7 +63,7 @@ class UserGateway extends EndpointGateway{
      * @param String $comment ( Optional )
      * @return Data
      */
-    public function createNotification( $user = null, $callback = null, $comment = null )
+    public function createNotification( $user, $callback, $comment = "A notifiaction for Withings", $deviceType = null)
     {
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
@@ -71,10 +71,7 @@ class UserGateway extends EndpointGateway{
         if ( $callback == null )
             throw new \Exception("No callback for notification defined");
 
-        if ( $comment == null )
-            $comment = "A notification from withings";
-
-        return $this->makeApiRequest( 'notify?action=subscribe&callbackurl=' . rawurlencode( $callback ) . '&comment=' . rawurlencode($comment) . '&userid=' . $user );
+        return $this->makeApiRequest( 'notify?action=subscribe&callbackurl=' . rawurlencode( $callback ) . '&comment=' . rawurlencode($comment) . '&appli' . $deviceType  . '&userid=' . $user );
     }
 
     /**
@@ -84,7 +81,7 @@ class UserGateway extends EndpointGateway{
      * @param String $callback
      * @return Data
      */
-    public function getNotificationInfo( $user, $callback, $deviceType = null)
+    public function getNotificationInfo( $user, $callback)
     {
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
@@ -92,7 +89,7 @@ class UserGateway extends EndpointGateway{
         if ( $callback == null )
             throw new \Exception("No callback for notification defined");
         
-        return $this->makeApiRequest( 'notify?action=get&callbackurl=' . rawurlencode( $callback ) . '&appli' . $deviceType . '&userid=' . $user );
+        return $this->makeApiRequest( 'notify?action=get&callbackurl=' . rawurlencode( $callback ) . '&userid=' . $user );
     }
 
     /**

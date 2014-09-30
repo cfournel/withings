@@ -84,15 +84,15 @@ class UserGateway extends EndpointGateway{
      * @param String $callback
      * @return Data
      */
-    public function getNotificationInfo( $user = null, $callback = null )
+    public function getNotificationInfo( $user, $callback, $deviceType = null)
     {
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
 
         if ( $callback == null )
             throw new \Exception("No callback for notification defined");
-
-        return $this->makeApiRequest( 'notify?action=get&callbackurl=' . rawurlencode( $callback ) . '&userid=' . $user );
+        
+        return $this->makeApiRequest( 'notify?action=get&callbackurl=' . rawurlencode( $callback ) . '&appli' . $deviceType . '&userid=' . $user );
     }
 
     /**

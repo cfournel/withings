@@ -39,6 +39,19 @@ class UserGateway extends EndpointGateway{
     }
     
     /**
+     * Request heart data from the API and call the method which saves it locally
+     *
+     * @param WithingsAccount $withingsAccount
+     */
+    private function gettHeart($user = null)
+    {
+        if ( $user == null )
+            throw new \Exception("No Withings User id defined");
+        
+        return $this->makeApiRequest( 'measure?action=getmeas&userid=' . $user . "&devtype=4" );
+    }
+    
+    /**
      * Get user sleeps depending on user param ( a withings account can manage multiple users )
      *
      * @param String $user

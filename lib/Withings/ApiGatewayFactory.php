@@ -56,6 +56,11 @@ class ApiGatewayFactory
      * @var \OAuth\Common\Http\Client\ClientInterface
      */
     protected $httpClient;
+    
+    /**
+     * @var string
+     */
+    public $proxy = null;
 
     /**
      * Set consumer credentials
@@ -148,6 +153,7 @@ class ApiGatewayFactory
     public function setHttpClient(\OAuth\Common\Http\Client\ClientInterface $client)
     {
         $this->httpClient = $client;
+        $this->httpClient->setProxy( $this->proxy );
         return $this;
     }
 
@@ -207,7 +213,7 @@ class ApiGatewayFactory
                 $factory->setHttpClient($this->httpClient);
             }
 
-            $this->service = $factory->createService('Withings', $credentials, $this->storageAdapter);
+            $this->service = $factory->createService('Withings', $credentials, $this->storageAdapter, array(), null, $this->proxy);
         }
 
         return $this->service;

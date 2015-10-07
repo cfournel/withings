@@ -35,7 +35,7 @@ class UserGateway extends EndpointGateway{
         if ( $enddate !== null )
             $enddate = "&enddateymd=" . date( "Y-m-d" , $enddate );
         
-        return $this->makeApiRequest( 'v2/measure?action=getactivity&userid=' . $user . "&startdateymd=" . date ( "Y-m-d", $startdate ) . $enddate );
+        return $this->makeApiRequest( 'v2/measure?action=getactivity&userid=' . $user ); //. "&startdateymd=" . date ( "Y-m-d", $startdate ) . $enddate );
     }
     
     /**
@@ -83,6 +83,7 @@ class UserGateway extends EndpointGateway{
 
         if ( $callback == null )
             throw new \Exception("No callback for notification defined");
+
 
         return $this->makeApiRequest( 'notify?action=subscribe&callbackurl=' . rawurlencode( $callback ) . '&comment=' . rawurlencode($comment) . '&appli' . $deviceType  . '&userid=' . $user );
     }

@@ -27,15 +27,17 @@ class UserGateway extends EndpointGateway{
      * @param String $user
      * @return Data
      */
-    public function getActivities( $user = null, $startdate, $enddate = null )
+    public function getActivities( $user = null, $startdate = "2015-01-01", $enddate = null )
     {
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
         
         if ( $enddate !== null )
-            $enddate = "&enddateymd=" . date( "Y-m-d" , $enddate );
+            $date = "&startdateymd=" . $startdate . "&enddateymd=" . $enddate;
+        else
+            $date = "&date" . $startdate;
         
-        return $this->makeApiRequest( 'v2/measure?action=getactivity&userid=' . $user ); //. "&startdateymd=" . date ( "Y-m-d", $startdate ) . $enddate );
+        return $this->makeApiRequest( 'v2/measure?action=getactivity&userid=' . $user );//. $date );
     }
     
     /**
@@ -76,16 +78,17 @@ class UserGateway extends EndpointGateway{
      * @param String $comment ( Optional )
      * @return Data
      */
-    public function createNotification( $user, $callback, $comment = "A notifiaction for Withings", $deviceType = null)
+    public function createNotification( $user, $callback, $deviceType = null)
     {
+        $comment = "A notifiaction for Withings type" . $deviceType;
+
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
 
         if ( $callback == null )
             throw new \Exception("No callback for notification defined");
-
-
-        return $this->makeApiRequest( 'notify?action=subscribe&callbackurl=' . rawurlencode( $callback ) . '&comment=' . rawurlencode($comment) . '&appli' . $deviceType  . '&userid=' . $user );
+ 
+        return $this->makeApiRequest( 'notify?action=subscribe&userid=' . $user . '&callbackurl=' . $callback  . '&comment=' . $comment . '&appli=' . $deviceType  );
     }
 
     /**

@@ -31,6 +31,21 @@ class ApiGatewayFactory
      * @var string (default: '-')
      */
     protected $userID = '-';
+
+    /**
+     * @var string (default: '-')
+     */
+    protected $startDate = null;
+
+    /**
+     * @var string (default: '-')
+     */
+    protected $endDate = null;
+
+    /**
+     * @var string (default: '-')
+     */
+    protected $date = null;
     
     /**
      * @var string (default: 'json')
@@ -145,6 +160,45 @@ class ApiGatewayFactory
     }
 
     /**
+     * Set Withings startdateymd for API calls
+     *
+     * @access public
+     * @param string $id
+     * @return \Withings\ApiGatewayFactory
+     */
+    public function setStartDate($id)
+    {
+        $this->startDate = $id;
+        return $this;
+    }
+
+    /**
+     * Set Withings enddateymd for API calls
+     *
+     * @access public
+     * @param string $id
+     * @return \Withings\ApiGatewayFactory
+     */
+    public function setEndDate($id)
+    {
+        $this->endDate = $id;
+        return $this;
+    }
+
+    /**
+     * Set Withings enddateymd for API calls
+     *
+     * @access public
+     * @param string $id
+     * @return \Withings\ApiGatewayFactory
+     */
+    public function setDate($id)
+    {
+        $this->date = $id;
+        return $this;
+    }
+
+    /**
      * Set HTTP Client library for Withings service.
      *
      * @param  \OAuth\Common\Http\Client\ClientInterface $client
@@ -175,7 +229,10 @@ class ApiGatewayFactory
     {
         $gateway->setService($this->getService())
                 ->setResponseFormat($this->responseFormat)
-                ->setUserID($this->userID);
+                ->setUserID($this->userID)
+                ->setStartDate($this->startDate)
+                ->setEndDate($this->endDate)
+                ->setDate($this->date);
     }
 
     /**

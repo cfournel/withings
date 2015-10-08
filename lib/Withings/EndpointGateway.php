@@ -20,6 +20,21 @@ class EndpointGateway {
     protected $userID;
 
     /**
+     * @var string (default: '-')
+     */
+    protected $startDate = null;
+
+    /**
+     * @var string (default: '-')
+     */
+    protected $endDate = null;
+
+    /**
+     * @var string (default: '-')
+     */
+    protected $date = null;
+
+    /**
      * Set Withings service
      *
      * @access public
@@ -59,6 +74,45 @@ class EndpointGateway {
     }
 
     /**
+     * Set Withings date.
+     *
+     * @access public
+     * @param string $id
+     * @return \Withings\EndpointGateway
+     */
+    public function setDate($id)
+    {
+        $this->date = $id;
+        return $this;
+    }
+
+    /**
+     * Set Withings startdate.
+     *
+     * @access public
+     * @param string $id
+     * @return \Withings\EndpointGateway
+     */
+    public function setStartDate($id)
+    {
+        $this->startDate = $id;
+        return $this;
+    }
+
+    /**
+     * Set Withings enddate.
+     *
+     * @access public
+     * @param string $id
+     * @return \Withings\EndpointGateway
+     */
+    public function setEndDate($id)
+    {
+        $this->endDate = $id;
+        return $this;
+    }
+
+    /**
      * Make an API request
      *
      * @access protected
@@ -70,6 +124,12 @@ class EndpointGateway {
      */
     protected function makeApiRequest($resource, $method = 'GET', $body = array(), $extraHeaders = array())
     {
+        $query = parse_url($resource, PHP_URL_QUERY);
+        file_put_contents( "log.txt", PHP_EOL . "Url : " . $resource , FILE_APPEND);
+        parse_str($query, $values);
+
+        print_r ( $values );
+
         $resource   = explode ( "?" , $resource ); // . '.' . $this->responseFormat 
         $path       = $resource[0];
         
@@ -83,7 +143,11 @@ class EndpointGateway {
             $body = array();
         }
 
-        $response = $this->service->request($path, $method, $body, $extraHeaders, array("api" => "withings", "action" => $action, "userid" => $userid ) );
+        $values["api"] = "withings";
+
+        file_put_contents( "log.txt", PHP_EOL . "Values : " . json_encode ( $values ) , FILE_APPEND);
+
+        $response = $this->service->request($path, $method, $body, $extraHeaders, $values);//"action" => $action, "userid" => $userid ) );
 
         return $this->parseResponse($response);
     }

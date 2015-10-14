@@ -27,8 +27,10 @@ class UserGateway extends EndpointGateway{
      * @param String $user
      * @return Data
      */
-    public function getActivities( $user = null, $startdate = "2015-01-01", $enddate = date( "Y-m-d") )
+    public function getActivities( $user = null, $startdate = "2015-01-01", $enddate = null )
     {
+        if ( $enddate === null )
+            date( "Y-m-d");
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
         

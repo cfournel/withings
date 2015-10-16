@@ -10,13 +10,16 @@ class UserGateway extends EndpointGateway{
      * @param String $user
      * @return Data
      */
-    public function getBody( $user = null, $lastUpdate = '' )
+    public function getBody( $user = null, $stardate = null, $enddate = null , $lastUpdate = '' )
     {
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
         
         if ( !empty ( $lastUpdate ) )
             $lastUpdate = '&lastupdate=' . strtotime( $lastUpdate );
+
+        if ( $stardate !== null )
+           $lastUpdate =  '&startdate=' . $stardate . ' &enddate=' . $enddate;
         
         return $this->makeApiRequest( 'measure?action=getmeas&userid=' . $user . $lastUpdate );
     }

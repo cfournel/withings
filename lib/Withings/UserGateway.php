@@ -19,7 +19,7 @@ class UserGateway extends EndpointGateway{
             $lastUpdate = '&lastupdate=' . strtotime( $lastUpdate );
 
         if ( $stardate !== null )
-           $lastUpdate =  '&startdate=' . $stardate . ' &enddate=' . $enddate;
+           $lastUpdate =  '&startdate=' . $stardate . '&enddate=' . $enddate;
         
         return $this->makeApiRequest( 'measure?action=getmeas&userid=' . $user . $lastUpdate );
     }

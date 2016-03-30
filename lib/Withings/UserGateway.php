@@ -52,7 +52,7 @@ class UserGateway extends EndpointGateway{
      *
      * @param WithingsAccount $withingsAccount
      */
-    private function getHeart($user = null)
+    public function getHeart($user = null)
     {
         if ( $user == null )
             throw new \Exception("No Withings User id defined");
